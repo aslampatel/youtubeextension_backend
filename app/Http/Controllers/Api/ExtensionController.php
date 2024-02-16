@@ -27,7 +27,29 @@ class ExtensionController extends Controller
             //
             return response()->json([
                         'success'=>true,
-                        'message'=>['campaing successfully created.'],
+                        'message'=>['campaing list.'],
+                        'data'=>[
+                            'campaign_list'=> $campainList
+                        ]
+             ]);
+        
+    }
+    /**
+     *@campaingDone 
+     * 
+     **/
+    public function campaingDone(Request $request)
+    {
+        # code...
+        
+
+            $user_id     = Auth::user()->id;
+            //
+            $campainList =  Campaign::whereNotIn('user_id',[$user_id])->get();
+            //
+            return response()->json([
+                        'success'=>true,
+                        'message'=>['campaing list.'],
                         'data'=>[
                             'campaign_list'=> $campainList
                         ]

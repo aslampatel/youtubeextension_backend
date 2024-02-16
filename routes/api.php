@@ -34,5 +34,6 @@ Route::group(['namespace' => 'Api', 'prefix' => 'v1','middleware' => ['auth:api'
 
 Route::group(['namespace' => 'Api', 'prefix' => 'v2','middleware' => ['auth:api']], function () {
     //
-    Route::get('campaing-list', [ExtensionController::class, 'getCampaingList']);
+    Route::get('campaign-list', [ExtensionController::class, 'getCampaingList']);
+    Route::post('camaign-done', [ExtensionController::class, 'campaingDone']);
 });

@@ -11,19 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('wallets', function (Blueprint $table) {
+        Schema::create('campaing_users', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->index();
-            $table->bigInteger('campaign_id')->nullable();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('campaign_id');
+            $table->unsignedBigInteger('owner_id');
             $table->float('coin',8,2)->default(0);
-            $table->enum('type',['C','D'])->default('D');
-            $table->string('transiction_id')->nullable();
-            $table->string('coin_type')->nullable();
             $table->timestamps();
         });
 
-        Schema::table('wallets', function($table) {
+
+        Schema::table('campaing_users', function($table) {
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('owner_id')->references('id')->on('users');
+            $table->foreign('campaign_id')->references('id')->on('campaigns');
+            
         });
     }
 
@@ -32,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('wallets');
+        Schema::dropIfExists('campain_users');
     }
 };
