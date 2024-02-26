@@ -25,7 +25,7 @@ class ExtensionController extends Controller
 
             $user_id        = Auth::user()->id;
             //
-            $campainList =  Campaign::whereNotIn('user_id',[$user_id])->get();
+            $campainList =  Campaign::whereNotIn('user_id',[$user_id])->inRandomOrder()->first();
             //
             return response()->json([
                         'success'=>true,
